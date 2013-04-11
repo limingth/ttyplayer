@@ -1,0 +1,14 @@
+
+# to teach Channel 1
+	./teach 1 
+
+# to view Channel 1
+	./view 1
+
+# Hint for teacher
+	Please use a ramdon channel number to broadcast.
+	such as ./teach 0402
+	then the students should ./view 0402
+
+	when you want to quit, do not forget to Type "exit"
+

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+	echo Usage:  ./view channel_num
+	echo example: ./view 1
+	exit
+fi
+
+echo Client is viewing $1
+client $1

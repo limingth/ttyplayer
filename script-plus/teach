@@ -1,0 +1,46 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+	echo Usage:  ./teach channel_num
+	echo "        " example: ./teach 1
+	echo 
+	echo Using channels:
+	ps au | awk '{print $1 " "  $7 " " $11 " " $12}' | grep server | grep -v grep
+	echo you are in `tty` now.
+	exit
+fi
+
+CH=`ps au | awk '{print $11 " " $12}' | grep ^server | awk '{print $2}'`
+echo Using CH is $CH
+
+echo you are in `tty` now.
+
+for item in $CH; 
+do
+	#echo $item is using, check
+	if [ $1 = $item ]; then
+		echo Sorry, Channel $item is already used !
+		echo please choose another channel 
+		exit
+	fi
+done
+
+echo OK, Channel $1 is now broadcasting...
+
+FIFO=/tmp/.fifo$1
+
+if [ ! -p "$FIFO" ]; then
+	echo $FIFO file not exists
+	mkfifo $FIFO
+fi
+
+cat $FIFO | server $1 2>/dev/null  1>&2 &
+echo When you finish your demo, Type \"exit\" 
+script -f $FIFO 
+echo -------------------------------------
+echo 
+echo These server are still teaching...
+ps au | awk '{print $1 " "  $7 " " $11 " " $12}' | grep server | grep -v grep
+echo you are in `tty` now.
+echo 
+echo Thanks for your teaching in codepark.us
