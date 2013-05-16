@@ -7,4 +7,4 @@ if [ -z $1 ]; then
 fi
 
 echo Client is viewing $1
-client $1
+./client $1

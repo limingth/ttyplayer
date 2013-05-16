@@ -34,7 +34,7 @@ if [ ! -p "$FIFO" ]; then
 	mkfifo $FIFO
 fi
 
-cat $FIFO | server $1 2>/dev/null  1>&2 &
+cat $FIFO | ./server $1 2>/dev/null  1>&2 &
 echo When you finish your demo, Type \"exit\" 
 script -f $FIFO 
 echo -------------------------------------
